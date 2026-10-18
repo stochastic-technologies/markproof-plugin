@@ -1,0 +1,26 @@
+/* Markproof – Accessibility Checks admin styles. Muted, no upsell shouting. */
+.markproof .lead { max-width: 60rem; color: #50575e; }
+.markproof .aa-cards { display: flex; gap: 1rem; margin: 1.25rem 0; flex-wrap: wrap; }
+.markproof .aa-card { background: #fff; border: 1px solid #dcdcde; border-radius: 8px; padding: 1rem 1.25rem; min-width: 11rem; }
+.markproof .aa-num { display: block; font-size: 2rem; line-height: 1.1; font-weight: 600; }
+.markproof .aa-num.aa-error { color: #b32d2e; }
+.markproof .aa-num.aa-warn { color: #996800; }
+.markproof .aa-label { color: #50575e; }
+.markproof .aa-pill { display: inline-block; border-radius: 999px; padding: 0 .5rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; border: 1px solid #dcdcde; margin-right: .35rem; }
+.markproof .aa-pill.aa-error { background: #fcf0f1; border-color: #e6b8b8; color: #8a1f1f; }
+.markproof .aa-pill.aa-warning { background: #fdf6e3; border-color: #e6d3a3; color: #7a5a00; }
+.markproof td.aa-fix { max-width: 32rem; }
+.markproof code { white-space: normal; word-break: break-word; background: #f6f7f7; }
+.markproof .aa-list { list-style: disc; margin-left: 1.25rem; color: #50575e; }
+.markproof .aa-progress { margin-left: 1rem; color: #50575e; }
+.markproof .aa-bar { display: inline-block; width: 14rem; height: .6rem; background: #f0f0f1; border-radius: 999px; overflow: hidden; vertical-align: middle; margin-right: .5rem; }
+.markproof .aa-bar span { display: block; height: 100%; background: #2271b1; width: 0; }
+
+/* Posts list column */
+.column-markproof { width: 9rem; }
+.aa-count { color: #b32d2e; font-weight: 600; text-decoration: none; }
+.aa-ok { color: #0b6b4f; }
+.aa-muted { color: #a7aaad; }
+
+/* One line about the paid version. Not a notice, not dismissible, not repeated elsewhere. */
+.aa-upto { color: #50575e; font-size: .92rem; margin: 1.25rem 0 0; }

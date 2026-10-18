@@ -1,0 +1,17 @@
+# The rules have two fixtures: one page that must produce 22 findings, and one that must produce none at all,
+# because it is correct in the ways that tempt a rule to invent a finding. This runs both on every push.
+name: rules
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  fixtures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: php -v
+      - name: the rules find what is broken and invent nothing on what is not
+        run: php tests/test-rules-standalone.php
