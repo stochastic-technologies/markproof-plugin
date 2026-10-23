@@ -257,6 +257,9 @@ class Markproof_Admin {
 							<td class="aa-fix">
 								<?php echo esc_html( $row->message ); ?><br>
 								<span class="description"><?php echo esc_html( $info ? $info['fix'] : '' ); ?></span>
+								<?php if ( $info ) : ?>
+									<br><a class="description" href="<?php echo esc_url( 'https://accessaudit.dev/checks/' . rawurlencode( $row->rule_id ) . '.html' ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'What this means, and how to fix it in WordPress', 'markproof' ); ?> <span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'markproof' ); ?></span></a>
+								<?php endif; ?>
 							</td>
 							<td><code><?php echo esc_html( $row->snippet ); ?></code></td>
 						</tr>

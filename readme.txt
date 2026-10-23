@@ -3,7 +3,7 @@ Tags: accessibility, wcag, ada, audit, alt text
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,12 @@ No. Scanning happens only in the admin, in small batches, and never on a visitor
 4. Image alt text: every image with nothing filled in, with the box to type the description and one Save button for all of them.
 
 == Changelog ==
+
+= 0.2.1 =
+* Images that are tracking beacons (one-by-one pixels from Facebook, Google and the like) or that their own
+  author hid with display:none or visibility:hidden are no longer reported as missing alt text. They are not
+  pictures anyone is meant to see, they cannot carry a useful description, and reporting them buried the
+  findings that matter: on a large marketing site, a Facebook pixel was the top finding on every page.
 
 = 0.2.0 =
 * New: check the post you are writing, before you publish it. A button in the editor sidebar runs

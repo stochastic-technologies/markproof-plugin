@@ -221,7 +221,17 @@ class Markproof_Rules {
 			if ( self::is_spacer( $img ) ) {
 				continue; // a zero-width or zero-height image is a spacer, not something a visitor sees
 			}
-			if ( ! $img->hasAttribute( 'alt' ) && ! self::has_hidden_ancestor( $img ) ) {
+			// An image is named by any of alt, aria-label, aria-labelledby or title, in that order of
+			// precedence; flagging one that carries aria-label but no alt was a false positive, and the
+			// W3C's ACT rule for this check counts such an image as named.
+			$named = '' !== trim( (string) $img->getAttribute( 'alt' ) )
+				|| '' !== trim( (string) $img->getAttribute( 'aria-label' ) )
+				|| ( '' !== trim( (string) $img->getAttribute( 'aria-labelledby' ) ) && self::labelled_by_exists( $img ) )
+				|| '' !== trim( (string) $img->getAttribute( 'title' ) );
+			if ( self::is_invisible_or_beacon( $img ) ) {
+				continue; // a tracking beacon or an image hidden by its author is not a missing description
+			}
+			if ( ! $named && ! self::has_hidden_ancestor( $img ) ) {
 				// If the image is the only content of a link or button that has no accessible name, the
 				// link finding below already says what to do about it. Two findings for one defect is
 				// noise, and noise is what teaches people to stop reading our findings.
@@ -536,6 +546,39 @@ class Markproof_Rules {
 	}
 
 	/** Is this element inside something the author marked aria-hidden? */
+
+	/**
+	 * Is this image a beacon or something the author hid on purpose?
+	 *
+	 * One-by-one pixels from Facebook, Google and ad networks are not pictures anyone is meant to see; they cannot
+	 * carry useful alt text, and reporting them buries the findings that matter. Real reports taught us this: the
+	 * first paid audit we ran on a large marketing site listed a Facebook tracking pixel as its top finding on
+	 * every page.
+	 */
+	private static function is_invisible_or_beacon( DOMElement $img ) {
+		$w = rtrim( strtolower( trim( (string) $img->getAttribute( 'width' ) ) ), 'px' );
+		$h = rtrim( strtolower( trim( (string) $img->getAttribute( 'height' ) ) ), 'px' );
+		if ( is_numeric( $w ) && is_numeric( $h ) && (float) $w <= 2 && (float) $h <= 2 ) {
+			return true;
+		}
+		$style = strtolower( (string) $img->getAttribute( 'style' ) );
+		if ( preg_match( '/display\s*:\s*none|visibility\s*:\s*hidden/', $style ) ) {
+			return true;
+		}
+		$host = strtolower( (string) parse_url( (string) $img->getAttribute( 'src' ), PHP_URL_HOST ) );
+		if ( '' === $host ) {
+			return false;
+		}
+		foreach ( array( 'facebook.com', 'facebook.net', 'google-analytics.com', 'googletagmanager.com',
+			'doubleclick.net', 'analytics.tiktok.com', 'bat.bing.com', 'ads.linkedin.com', 'sc-static.net',
+			'hotjar.com', 'clarity.ms', 'matomo', 'piwik', 'segment.io', 'mixpanel.com' ) as $needle ) {
+			if ( false !== strpos( $host, $needle ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private static function has_hidden_ancestor( DOMNode $node ) {
 		$parent = $node->parentNode;
 		while ( $parent && $parent instanceof DOMElement ) {
