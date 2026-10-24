@@ -3,7 +3,7 @@ Tags: accessibility, wcag, ada, audit, alt text
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,10 @@ No. Scanning happens only in the admin, in small batches, and never on a visitor
 4. Image alt text: every image with nothing filled in, with the box to type the description and one Save button for all of them.
 
 == Changelog ==
+
+= 0.2.2 =
+* Before the first scan, the dashboard says "this site has not been checked yet" in words. It used to show
+  three zeroes, and three zeroes read as good news: a site nobody has checked is not clean, it is unknown.
 
 = 0.2.1 =
 * Images that are tracking beacons (one-by-one pixels from Facebook, Google and the like) or that their own

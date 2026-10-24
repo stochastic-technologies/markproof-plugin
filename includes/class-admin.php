@@ -89,20 +89,31 @@ class Markproof_Admin {
 				<?php esc_html_e( 'Checks your own pages for accessibility problems that can be found in the HTML, and tells you how to fix each one. It does not check colour contrast or anything that needs a browser rendering, it does not change your content, and nothing about your site is sent anywhere.', 'markproof' ); ?>
 			</p>
 
-			<div class="aa-cards">
-				<div class="aa-card">
-					<span class="aa-num"><?php echo $scan ? (int) $scan->urls_done : 0; ?></span>
-					<span class="aa-label"><?php esc_html_e( 'pages checked', 'markproof' ); ?></span>
+			<?php if ( ! $scan ) : ?>
+				<?php
+				/* Three zeroes read as good news, and a site that has never been checked is not good news - it is
+				   unknown. Before the first scan the page says that in words instead of showing three cards. */
+				?>
+				<div class="notice notice-info inline markproof-first">
+					<p><strong><?php esc_html_e( 'This site has not been checked yet.', 'markproof' ); ?></strong>
+					<?php esc_html_e( 'Nothing is known about its pages either way — it is not "clean", it is unchecked. The first scan takes about a minute and covers up to fifty pages, starting with your home page and the pages linked from it.', 'markproof' ); ?></p>
 				</div>
-				<div class="aa-card">
-					<span class="aa-num aa-error"><?php echo (int) $errors; ?></span>
-					<span class="aa-label"><?php esc_html_e( 'errors', 'markproof' ); ?></span>
+			<?php else : ?>
+				<div class="aa-cards">
+					<div class="aa-card">
+						<span class="aa-num"><?php echo (int) $scan->urls_done; ?></span>
+						<span class="aa-label"><?php esc_html_e( 'pages checked', 'markproof' ); ?></span>
+					</div>
+					<div class="aa-card">
+						<span class="aa-num aa-error"><?php echo (int) $errors; ?></span>
+						<span class="aa-label"><?php esc_html_e( 'errors', 'markproof' ); ?></span>
+					</div>
+					<div class="aa-card">
+						<span class="aa-num aa-warn"><?php echo (int) $warns; ?></span>
+						<span class="aa-label"><?php esc_html_e( 'warnings', 'markproof' ); ?></span>
+					</div>
 				</div>
-				<div class="aa-card">
-					<span class="aa-num aa-warn"><?php echo (int) $warns; ?></span>
-					<span class="aa-label"><?php esc_html_e( 'warnings', 'markproof' ); ?></span>
-				</div>
-			</div>
+			<?php endif; ?>
 
 			<p>
 				<button class="button button-primary" id="aa-run"><?php esc_html_e( 'Run a scan now', 'markproof' ); ?></button>
