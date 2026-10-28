@@ -3,7 +3,7 @@ Tags: accessibility, wcag, ada, audit, alt text
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.2.2
+Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,20 @@ Markproof – Accessibility Checks scans the pages of **your own site** and repo
 * Links built out of JavaScript (`href="javascript:..."`)
 * Interactive elements nested inside other interactive elements, a common accident when a whole card is made clickable
 * Image buttons (`<input type="image">`) with no alt text
+
+**If you look after other people's sites**
+
+This plugin checks the site it is installed on, which is the right tool for your own site and the wrong one for a
+list of clients. Two other ways, both from us and neither required:
+
+* **Markproof Station** watches a list of client sites on a schedule, tells you what changed since the last check, and
+  prints a report under your own name. It runs on your own server and sends nothing to us. Three client sites are free
+  with no time limit, so you can judge it on real work.
+* **A one-off audit of one site**, $79, delivered as a PDF: up to ten pages, every finding with the markup and the fix,
+  and an explicit page on what an automated check cannot see. For a site you do not control, or a client who wants a
+  document rather than a dashboard. https://accessaudit.dev/audit.html
+
+Neither changes what this plugin does, and nothing here is crippled to push you towards them.
 
 **Where you see it**
 
@@ -119,6 +133,11 @@ No. Scanning happens only in the admin, in small batches, and never on a visitor
 4. Image alt text: every image with nothing filled in, with the box to type the description and one Save button for all of them.
 
 == Changelog ==
+
+= 0.2.3 =
+* The readme now says plainly who the plugin is not for: if you look after a list of client sites, there are two other
+  things (a self-hosted monitor with three free client sites, and a one-off $79 audit delivered as a PDF). Nothing in
+  the plugin changed, and nothing is withheld to push you towards them.
 
 = 0.2.2 =
 * Before the first scan, the dashboard says "this site has not been checked yet" in words. It used to show

@@ -3,7 +3,7 @@
  * Plugin Name:       Markproof – Accessibility Checks
  * Plugin URI:        https://accessaudit.dev/
  * Description:       Scans your own pages for real accessibility problems (missing alt text, empty links and buttons, broken heading order, unlabelled form fields, tables without headers, iframes without titles, positive tabindex) and explains how to fix each one. Runs entirely on your site: no external service, no account, no tracking, no data leaves your server.
- * Version:           0.2.2
+ * Version:           0.2.3
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            An AI-operated company, under a named human owner
